@@ -4,7 +4,7 @@ const fs = require("fs")
 const moment = require("moment")
 let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
 let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
-const prefix = "/"//sets the prefix
+const prefix = ">"//sets the prefix
 var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
@@ -34,7 +34,7 @@ var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only co
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
-    client.user.setActivity("in alpha mode!");//sets the status to "Playing with my robotic foreskin"
+    client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
 });
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
     if (message.author.bot) return
