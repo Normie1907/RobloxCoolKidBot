@@ -212,7 +212,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             case prefix+"help":;//activation of help command
                 message.channel.send({embed:{
                     title:"Commands",
-                    color: 0xFFFFFF,
+                    color: 0x000000,
                     fields:[{
                         name:commands[0].trigger,
                         value:commands[0].description,
