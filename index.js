@@ -2,20 +2,12 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs")
 const moment = require("moment")
-let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
-let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
-const prefix = ">"//sets the prefix
+let userData = JSON.parse(fs.readFileSync('Storage/userData.json', 'utf8'))
+let serverData = JSON.parse(fs.readFileSync('Storage/serverData.json', 'utf8'))
+const prefix = "/"//sets the prefix
 var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
-}
-var levelCommand = {
-    trigger:prefix+"level",
-    description:"Tells you your level and how much xp you have until the next level"
-}
-var moneyCommand = {
-    trigger:prefix+"money",
-    description:"Shows you your money"
 }
 var pruneCommand = {
     trigger:prefix+"prune",
@@ -29,12 +21,12 @@ var banCommand = {
     trigger:prefix+"ban",
     description:"Do "+prefix+"ban @user | reason"
 }
-var commands = [helpCommand,levelCommand,moneyCommand]//list of commands
+var commands = [helpCommand]//list of commands
 var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only commands
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
-    client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
+    client.user.setActivity("in alpha mode!");//sets the status to "Playing with my robotic foreskin"
 });
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
     if (message.author.bot) return
@@ -44,18 +36,18 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     var administrator = message.member.roles.has(message.guild.roles.find("name", "Administrator").id)//true or false if iser is admin
     var superAdmin = message.member.roles.has(message.guild.roles.find("name", "Super Administrator").id)//true or false if user is super admin
     var RCK = message.member.roles.has(message.guild.roles.find("name", "Roblox Cool Kid").id)//true or false of user is a roblox cool kid
-    let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
-    let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
+    let userData = JSON.parse(fs.readFileSync('Storage/userData.json', 'utf8'))
+    let serverData = JSON.parse(fs.readFileSync('Storage/serverData.json', 'utf8'))
     if (!userData[message.author.id + message.guild.id]) userData[message.author.id + message.guild.id] = {}
     if (!userData[message.author.id + message.guild.id].money) userData[message.author.id + message.guild.id].money = 100
     if (!serverData[message.guild.id]) serverData[message.guild.id] = {}
     if (!serverData[message.guild.id].commandChannel) serverData[message.guild.id].commandChannel = ""
     if (!userData[message.author.id + message.guild.id].xp) userData[message.author.id + message.guild.id].xp = 0
     if (!userData[message.author.id + message.guild.id].level) userData[message.author.id + message.guild.id].level = 0
-    fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
+    fs.writeFile("Storage/userData.json", JSON.stringify(userData), (err) => {
         if (err) console.error(err)
     })
-    fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
+    fs.writeFile("Storage/serverData.json", JSON.stringify(serverData), (err) => {
         if (err) console.error(err)
     })
     var isStaffCommand = function(){
@@ -74,6 +66,23 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         message.reply("you reached level "+userData[message.author.id + message.guild.id].level)
     }
     if (message.content.startsWith(prefix)){//detects if the message starts with the prefix
+        if(message.content.startsWith(prefix+"level")){
+            message.channel.send({embed:{
+                title:message.author.username+"'s Level",
+                color: 0x22ccb7,
+                fields:[{
+                    name:"Level",
+                    value:userData[message.author.id + message.guild.id].level,             
+                    inline:true
+                },{
+                    name:"Xp left to level up",
+                    value:(userData[message.author.id + message.guild.id].level+1)*100 - userData[message.author.id + message.guild.id].xp,
+                    inline:true
+                }
+            ]}
+
+        })
+        }
         if (message.content.startsWith(prefix+"SetCommandChannel ")){
             var commandChannel = message.content.split(prefix+"SetCommandChannel ").splice(1)
             serverData[message.guild.id].commandChannel = commandChannel
@@ -155,8 +164,8 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-    if (message.channel.name !== serverData[message.guild.id].commandChannel){return}
-        switch(message.content.toLowerCase()){//detects more simple commands
+    if (message.channel.name !== serverData[message.guild.id].commandChannel){
+        switch(message.content.toLowerCase){//detects more simple commands
             case prefix+"level":
                 message.channel.send({embed:{
                     title:message.author.username+"'s Level",
@@ -208,21 +217,14 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 ]}
             })
                 break;
+
             case prefix+"help":;//activation of help command
                 message.channel.send({embed:{
                     title:"Commands",
-                    color: 0x000000,
+                    color: 0xFFFFFF,
                     fields:[{
                         name:commands[0].trigger,
                         value:commands[0].description,
-                        inline:false
-                    },{
-                        name:commands[1].trigger,
-                        value:commands[1].description,
-                        inline:false
-                    },{
-                        name:commands[2].trigger,
-                        value:commands[2].description,
                         inline:false
                     }
                 ]}
@@ -254,10 +256,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         message.reply("use the bot commands channel!")//warns the person to use the right channel
     }
 }
-fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
+fs.writeFile("Storage/userData.json", JSON.stringify(userData), (err) => {
     if (err) console.error(err)
 })
-fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
+fs.writeFile("Storage/serverData.json", JSON.stringify(serverData), (err) => {
     if (err) console.error(err)
 })
 });
