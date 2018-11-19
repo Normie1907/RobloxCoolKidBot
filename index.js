@@ -9,6 +9,14 @@ var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
 }
+var levelCommand = {
+    trigger:prefix+"level",
+    description:"Tells you your level and how much xp you have until the next level"
+}
+var moneyCommand = {
+    trigger:prefix+"money",
+    description:"Shows you your money"
+}
 var pruneCommand = {
     trigger:prefix+"prune",
     description:"Do "+prefix+"prune (number 1-100)"
@@ -208,6 +216,14 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     fields:[{
                         name:commands[0].trigger,
                         value:commands[0].description,
+                        inline:false
+                    },{
+                        name:commands[1].trigger,
+                        value:commands[1].description,
+                        inline:false
+                    },{
+                        name:commands[2].trigger,
+                        value:commands[2].description,
                         inline:false
                     }
                 ]}
