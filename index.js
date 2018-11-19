@@ -246,4 +246,4 @@ fs.writeFile("Storage/serverData.json", JSON.stringify(serverData), (err) => {
     if (err) console.error(err)
 })
 });
-client.login('NTAzNjQ5NjkyOTExOTI3MzAx.Dq5_0w.VGp2-RNJDpZqWLt38-hx8PzZZWU');
+client.login(process.env.BOT_TOKEN);
