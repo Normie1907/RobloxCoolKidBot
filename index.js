@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs")
 const moment = require("moment")
-let userData = JSON.parse(fs.readFileSync('/userData.json', 'utf8'))
-let serverData = JSON.parse(fs.readFileSync('/serverData.json', 'utf8'))
+let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
+let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
 const prefix = "/"//sets the prefix
 var helpCommand = {
     trigger:prefix+"help",
@@ -36,18 +36,18 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     var administrator = message.member.roles.has(message.guild.roles.find("name", "Administrator").id)//true or false if iser is admin
     var superAdmin = message.member.roles.has(message.guild.roles.find("name", "Super Administrator").id)//true or false if user is super admin
     var RCK = message.member.roles.has(message.guild.roles.find("name", "Roblox Cool Kid").id)//true or false of user is a roblox cool kid
-    let userData = JSON.parse(fs.readFileSync('/userData.json', 'utf8'))
-    let serverData = JSON.parse(fs.readFileSync('/serverData.json', 'utf8'))
+    let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
+    let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
     if (!userData[message.author.id + message.guild.id]) userData[message.author.id + message.guild.id] = {}
     if (!userData[message.author.id + message.guild.id].money) userData[message.author.id + message.guild.id].money = 100
     if (!serverData[message.guild.id]) serverData[message.guild.id] = {}
     if (!serverData[message.guild.id].commandChannel) serverData[message.guild.id].commandChannel = ""
     if (!userData[message.author.id + message.guild.id].xp) userData[message.author.id + message.guild.id].xp = 0
     if (!userData[message.author.id + message.guild.id].level) userData[message.author.id + message.guild.id].level = 0
-    fs.writeFile("/userData.json", JSON.stringify(userData), (err) => {
+    fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
         if (err) console.error(err)
     })
-    fs.writeFile("/serverData.json", JSON.stringify(serverData), (err) => {
+    fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
         if (err) console.error(err)
     })
     var isStaffCommand = function(){
@@ -239,10 +239,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         message.reply("use the bot commands channel!")//warns the person to use the right channel
     }
 }
-fs.writeFile("/userData.json", JSON.stringify(userData), (err) => {
+fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
     if (err) console.error(err)
 })
-fs.writeFile("/serverData.json", JSON.stringify(serverData), (err) => {
+fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
     if (err) console.error(err)
 })
 });
