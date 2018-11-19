@@ -74,23 +74,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         message.reply("you reached level "+userData[message.author.id + message.guild.id].level)
     }
     if (message.content.startsWith(prefix)){//detects if the message starts with the prefix
-        if(message.content.startsWith(prefix+"level")){
-            message.channel.send({embed:{
-                title:message.author.username+"'s Level",
-                color: 0x22ccb7,
-                fields:[{
-                    name:"Level",
-                    value:userData[message.author.id + message.guild.id].level,             
-                    inline:true
-                },{
-                    name:"Xp left to level up",
-                    value:(userData[message.author.id + message.guild.id].level+1)*100 - userData[message.author.id + message.guild.id].xp,
-                    inline:true
-                }
-            ]}
-
-        })
-        }
         if (message.content.startsWith(prefix+"SetCommandChannel ")){
             var commandChannel = message.content.split(prefix+"SetCommandChannel ").splice(1)
             serverData[message.guild.id].commandChannel = commandChannel
@@ -172,43 +155,59 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-    if (message.channel.name !== serverData[message.guild.id].commandChannel){
-    if (message.content.toLowerCase() === prefix+"work"){
-        var moneyRandom = Math.floor(Math.random()*100)
-        userData[message.author.id + message.guild.id].money += moneyRandom
-        message.channel.send({embed:{
-            title:"Work Today",
-            color: 0x2a4722,
-            fields:[{
-                name:"User",
-                value:message.author.username,
-                inline:true
-            },{
-                name:"Earned Money",
-                value:moneyRandom,
-                inline:true
-            }
-            ]}
-        })
-        
-    }
-    if (message.content.toLowerCase() === prefix+"money"){
-        message.channel.send({embed:{
-            title:"Bank",
-            color: 0x2a4722,
-            fields:[{
-                name:"User",
-                value:message.author.username,
-                inline:true
-            },{
-                name:"Money",
-                value:userData[message.author.id + message.guild.id].money,
-                inline:true
-            }
-            ]}
-        })
-    }
-        switch(message.content){//detects more simple commands
+    if (message.channel.name !== serverData[message.guild.id].commandChannel){return}
+        switch(message.content.toLowerCase()){//detects more simple commands
+            case prefix+"level":
+                message.channel.send({embed:{
+                    title:message.author.username+"'s Level",
+                    color: 0x22ccb7,
+                    fields:[{
+                        name:"Level",
+                        value:userData[message.author.id + message.guild.id].level,             
+                        inline:true
+                    },{
+                        name:"Xp left to level up",
+                        value:(userData[message.author.id + message.guild.id].level+1)*100 - userData[message.author.id + message.guild.id].xp,
+                        inline:true
+                    }
+                    ]}
+
+                })
+                break;
+            case prefix+"work":
+                var moneyRandom = Math.floor(Math.random()*100)
+                userData[message.author.id + message.guild.id].money += moneyRandom
+                message.channel.send({embed:{
+                    title:"Work Today",
+                        color: 0x2a4722,
+                        fields:[{
+                            name:"User",
+                            value:message.author.username,
+                            inline:true
+                        },{
+                            name:"Earned Money",
+                            value:moneyRandom,
+                            inline:true
+                           }
+                        ]}
+                })
+                break;
+            case prefix+"money":
+                    message.channel.send({embed:{
+                title:"Bank",
+                color: 0x2a4722,
+                fields:[{
+                    name:"User",
+                    value:message.author.username,
+                    inline:true
+                },{
+                    name:"Money",
+                    value:userData[message.author.id + message.guild.id].money,
+                    inline:true
+                }
+                ]}
+            })
+                break;
             case prefix+"help":;//activation of help command
                 message.channel.send({embed:{
                     title:"Commands",
