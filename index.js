@@ -147,7 +147,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-        switch(message.content.toLowerCase){//detects more simple commands
+        switch(message.content.toLowerCase()){//detects more simple commands
             case prefix+"level":
                 message.channel.send({embed:{
                     title:message.author.username+"'s Level",
