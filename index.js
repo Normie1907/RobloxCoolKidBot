@@ -79,7 +79,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     }
         if (message.content.startsWith(prefix+"SetCommandChannel ")){
             var commandChannel = message.content.split(prefix+"SetCommandChannel ").splice(1)
-            serverData[message.guild.id].commandChannel = commandChannel
+            serverData[message.guild.id].commandChannel = commandChannel 
+            fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
+                if (err) console.error(err)
+            })
             message.channel.send("Set bot commands channel to "+serverData[message.guild.id].commandChannel)
             return
         }
