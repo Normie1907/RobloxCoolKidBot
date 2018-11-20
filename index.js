@@ -238,7 +238,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     } else {
         message.reply("use the bot commands channel!")//warns the person to use the right channel
     }
-}
 fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
     if (err) console.error(err)
 })
