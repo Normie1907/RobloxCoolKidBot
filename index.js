@@ -164,7 +164,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-    if (message.channel.name !== serverData[message.guild.id].commandChannel){
+    if (message.channel.name === serverData[message.guild.id].commandChannel[0]){
         switch(message.content.toLowerCase){//detects more simple commands
             case prefix+"level":
                 message.channel.send({embed:{
