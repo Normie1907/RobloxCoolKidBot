@@ -147,7 +147,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-    if (message.channel.name === serverData[message.guild.id].commandChannel[0]){
         switch(message.content.toLowerCase){//detects more simple commands
             case prefix+"level":
                 message.channel.send({embed:{
@@ -202,6 +201,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 break;
 
             case prefix+"help":;//activation of help command
+                if (message.channel.name === serverData[message.guild.id].commandChannel[0]||!serverData[message.guild.id].commandChannel[0]){
                 message.channel.send({embed:{
                     title:"Commands",
                     color: 0xFFFFFF,
@@ -232,12 +232,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             ]}
 
         })
+                }else{message.reply("use the bot commands channel!")}
             break;
         
         }
-    } else {
-        message.reply("use the bot commands channel!")//warns the person to use the right channel
-    }
 fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
     if (err) console.error(err)
 })
