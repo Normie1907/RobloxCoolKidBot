@@ -4,7 +4,7 @@ const fs = require("fs")
 const moment = require("moment")
 let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
 let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
-const prefix = "/"//sets the prefix
+const prefix = ">"//sets the prefix
 var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
@@ -26,7 +26,7 @@ var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only co
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
-    client.user.setActivity("in alpha mode!");//sets the status to "Playing with my robotic foreskin"
+    client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
 });
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
     if (message.author.bot) return
@@ -65,28 +65,11 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         userData[message.author.id + message.guild.id].xp = userData[message.author.id + message.guild.id].xp - userData[message.author.id + message.guild.id].level*100
         message.reply("you reached level "+userData[message.author.id + message.guild.id].level)
     }
-    if (message.content.startsWith(prefix)){//detects if the message starts with the prefix
-        if(message.content.startsWith(prefix+"level")){
-            message.channel.send({embed:{
-                title:message.author.username+"'s Level",
-                color: 0x22ccb7,
-                fields:[{
-                    name:"Level",
-                    value:userData[message.author.id + message.guild.id].level,             
-                    inline:true
-                },{
-                    name:"Xp left to level up",
-                    value:(userData[message.author.id + message.guild.id].level+1)*100 - userData[message.author.id + message.guild.id].xp,
-                    inline:true
-                }
-            ]}
-
-        })
-        }
         if (message.content.startsWith(prefix+"SetCommandChannel ")){
             var commandChannel = message.content.split(prefix+"SetCommandChannel ").splice(1)
             serverData[message.guild.id].commandChannel = commandChannel
             message.channel.send("Set bot commands channel to "+serverData[message.guild.id].commandChannel)
+            return
         }
         if (message.content.startsWith(prefix+"prune")){//activation of prune command
             if (basicStaff||moderator||administrator||superAdmin||RCK){//makes sure the person pruning is staff
