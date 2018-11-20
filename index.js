@@ -9,6 +9,18 @@ var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
 }
+var levelCommand = {
+    trigger:prefix+"level",
+    description:"Tells you your level and how much xp you have left until the next level"
+}
+var moneyCommand = {
+    trigger:prefix+"money",
+    description:"Tells you how much money you have"
+}
+var workCommand = {
+    trigger:prefix+"work",
+    description:"Gives you a random ammount of money"
+}
 var pruneCommand = {
     trigger:prefix+"prune",
     description:"Do "+prefix+"prune (number 1-100)"
@@ -21,7 +33,7 @@ var banCommand = {
     trigger:prefix+"ban",
     description:"Do "+prefix+"ban @user | reason"
 }
-var commands = [helpCommand]//list of commands
+var commands = [helpCommand,levelCommand,moneyCommand,workCommand]//list of commands
 var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only commands
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
@@ -208,6 +220,18 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     fields:[{
                         name:commands[0].trigger,
                         value:commands[0].description,
+                        inline:false
+                    },{
+                        name:commands[1].trigger,
+                        value:commands[1].description,
+                        inline:false
+                    },{
+                        name:commands[2].trigger,
+                        value:commands[2].description,
+                        inline:false
+                    },{
+                        name:commands[3].trigger,
+                        value:commands[3].description,
                         inline:false
                     }
                 ]}
