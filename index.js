@@ -219,6 +219,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 }
                  memberToBan.ban(banReason);//bans a user for the reason listed
                 message.reply("you banned "+memberToBan+" for "+banReason);//says that you banned the person
+                message.guild.channels.find("name","server-logs").send(message.author+" banned "+memberToBan+" for "+banReason)
             }else{
             message.reply("you do not have permission to ban members");//tells a non-admin they can't ban people
         }
@@ -250,6 +251,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 }
                 memberToKick.kick(kickReason);//kicks a user for the reason listed
                 message.reply("you kicked "+memberToKick+" for "+kickReason);//says that you kicked the person
+                message.guild.channels.find("name","server-logs").send(message.author+" kicked "+memberToKick+" for "+kickReason)
             }else{
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
