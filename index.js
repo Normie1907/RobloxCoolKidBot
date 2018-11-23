@@ -98,6 +98,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         }
     }
         if (message.content.toLowerCase().startsWith(prefix+"8ball")){
+            if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
             var number = Math.floor(Math.random()*4)
                 switch (number){
                     case 4:
@@ -241,7 +245,29 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     }
         switch(message.content.toLowerCase()){//detects more simple commandscase prefix+"help":;//activation of help command
             case prefix+"serverinfo":
-                message.channel.send(message.guild.memberCount+"     "+message.guild.owner+"     "+message.guild.createdAt)
+                if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
+                message.channel.send({embed:{
+                    title:"Server Info",
+                    color: 0x09788d,
+                    fields:[{
+                        name:"Members",
+                        value:message.guild.memberCount,             
+                        inline:false
+                    },{
+                        name:"Owner",
+                        value:message.guild.owner,
+                        inline:false
+                    },{
+                        name:"Created at",
+                        value:message.guild.createdAt,
+                        inline:false
+                    }
+                ]}
+
+        })
             break
             case prefix+"help":
                 if (message.channel.name !== "bot-commands"){
