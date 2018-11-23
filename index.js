@@ -254,11 +254,11 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     color: 0x09788d,
                     fields:[{
                         name:"Members",
-                        value:message.guild.memberCount,             
+                        value:"0",             
                         inline:false
                     },{
                         name:"Owner",
-                        value:message.guild.owner,
+                        value:"1",
                         inline:false
                     },{
                         name:"Created at",
