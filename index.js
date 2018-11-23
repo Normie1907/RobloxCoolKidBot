@@ -262,7 +262,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                         inline:false
                     },{
                         name:"Created at",
-                        value:"2",
+                        value:message.guild.createdAt,
                         inline:false
                     }
                 ]}
