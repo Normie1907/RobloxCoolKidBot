@@ -176,6 +176,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         }
     }
         switch(message.content.toLowerCase()){//detects more simple commandscase prefix+"help":;//activation of help command
+            case prefix+"help":
                 if (message.channel.name !== "bot-commands"){
                     message.reply("use the bot commands channel!")
                     return
