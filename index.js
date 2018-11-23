@@ -37,6 +37,7 @@ client.on('ready', () => {//activates when "node ." is typed into command prompt
     client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
 });
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
+    if (!message.guild)return
     if (message.author.bot) return
     var author = message.author
     var basicStaff = message.member.roles.has(message.guild.roles.find("name", "Basic Staff").id)//true or false if user is basic staff
