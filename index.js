@@ -56,12 +56,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     if (!serverData[message.guild.id].commandChannel) serverData[message.guild.id].commandChannel = ""
     if (!userData[message.author.id + message.guild.id].xp) userData[message.author.id + message.guild.id].xp = 0
     if (!userData[message.author.id + message.guild.id].level) userData[message.author.id + message.guild.id].level = 0
-    fs.writeFile("userData.json", JSON.stringify(userData), (err) => {
-        if (err) console.error(err)
-    })
-    fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
-        if (err) console.error(err)
-    })
     var isStaffCommand = function(){
         for (var i = 0; i < staffCommands.length;i++ ){//goes through the ammount of items in command list
             if (message.content.startsWith(staffCommands[i])){
@@ -69,13 +63,41 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             }
         }
     }
-    var xpRandom = Math.floor(Math.random()*10)
-    var level = userData[message.author.id + message.guild.id].level
-    userData[message.author.id + message.guild.id].xp += xpRandom
-    if (userData[message.author.id + message.guild.id].xp >= (userData[message.author.id + message.guild.id].level+1)*100){
-        userData[message.author.id + message.guild.id].level += 1
-        userData[message.author.id + message.guild.id].xp = userData[message.author.id + message.guild.id].xp - userData[message.author.id + message.guild.id].level*100
-        message.reply("you reached level "+userData[message.author.id + message.guild.id].level)
+    if (message.content.toLowerCase().includes("rip")||message.content.toLowerCase().includes("f to pay respects")){//if the message says rip or f to pay respects
+        message.react("🇫");//adds the regional indicator f emoji to the message
+    }
+    if (message.content.toLowerCase().includes("owo")||message.content.toLowerCase().includes("uwu")||message.content.toLowerCase().includes("rawr")){//if the message contains furry shit
+        message.channel.send("furfag lol");//says ur a furry
+    }
+    if (message.content.toLowerCase().includes("foreskin")){//if niggas be talkin bout foreskin
+        message.channel.send("I heard foreskin :yum:");//tells people he heard foreskin
+    }
+    if (message.content.toLowerCase().includes("gn")||message.content.toLowerCase().includes("good night")||message.content.toLowerCase().includes("goodnight")){//if someone says good night
+        message.channel.send("Good night, sweet B");//says gn sweet b
+    }
+    if (message.content.toLowerCase().includes("hitler did nothing wrong")||message.content.toLowerCase().includes("hitler didn't do anything wrong")){//if they are being too edgy
+        message.channel.send("Wow wow wow, no need to be so edgy, calm down");//tells edgy kiddos to STOP
+    }
+    if (message.content.toLowerCase().includes("no u")||message.content.toLowerCase().includes("ur mum gay")||message.content.toLowerCase().includes("your mom gay")){//detects dead memes
+        message.channel.send("Bring dead memes elsewhere");//tells dead memers to heck off
+    }
+    if (message.content.toLowerCase().includes("alexa play despacito")||message.content.toLowerCase().includes("alexa, play despacito")||message.content.toLowerCase().includes("play despacito")){//if they say to play despacito
+        message.channel.send("ɴᴏᴡ ᴘʟᴀʏɪɴɢ: Despacito ───────────────:white_circle:───────────────────▐▐");//despacito is now playing copypasta
+    }
+    if (message.content.toLowerCase().includes("this is so sad")){//if they say this is so sad
+        var numbah = Math.floor(Math.random()*3)//chooses a random number 1-3
+        switch(numbah){//switch statement for the random number
+        case 0:;
+        message.channel.send(":sob: omg so sad :sob:"+message.guild.emojis.find("name","SOBBBBB"))//says it is sad
+        message.react(message.guild.emojis.find("name","SOBBBBB"))//reacts the sad man emoji
+        break;
+        case 1:;
+        message.channel.send("I can play despacito if you ask nicely");//second option to reply
+        break;
+        case 2:;
+        message.channel.send("Can we hit my wife?");//third option to reply
+        break;
+        }
     }
         if (message.content.startsWith(prefix+"prune")){//activation of prune command
             if (basicStaff||moderator||administrator||superAdmin||RCK){//makes sure the person pruning is staff
@@ -153,73 +175,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
-    if (message.channel.name !== "bot-commands")return
-        switch(message.content.toLowerCase()){//detects more simple commands
-            case prefix+"level":
-                if (message.channel.name !== "bot-commands"){
-                    message.reply("use the bot commands channel!")
-                    return
-                }
-                message.channel.send({embed:{
-                    title:message.author.username+"'s Level",
-                    color: 0x22ccb7,
-                    fields:[{
-                        name:"Level",
-                        value:userData[message.author.id + message.guild.id].level,             
-                        inline:true
-                    },{
-                        name:"Xp left to level up",
-                        value:(userData[message.author.id + message.guild.id].level+1)*100 - userData[message.author.id + message.guild.id].xp,
-                        inline:true
-                    }
-                    ]}
-
-                })
-                break;
-            case prefix+"work":
-                if (message.channel.name !== "bot-commands"){
-                    message.reply("use the bot commands channel!")
-                    return
-                }
-                var moneyRandom = Math.floor(Math.random()*100)
-                userData[message.author.id + message.guild.id].money += moneyRandom
-                message.channel.send({embed:{
-                    title:"Work Today",
-                        color: 0x2a4722,
-                        fields:[{
-                            name:"User",
-                            value:message.author.username,
-                            inline:true
-                        },{
-                            name:"Earned Money",
-                            value:moneyRandom,
-                            inline:true
-                           }
-                        ]}
-                })
-                break;
-            case prefix+"money":
-                if (message.channel.name !== "bot-commands"){
-                    message.reply("use the bot commands channel!")
-                    return
-                }
-                    message.channel.send({embed:{
-                title:"Bank",
-                color: 0x2a4722,
-                fields:[{
-                    name:"User",
-                    value:message.author.username,
-                    inline:true
-                },{
-                    name:"Money",
-                    value:userData[message.author.id + message.guild.id].money,
-                    inline:true
-                }
-                ]}
-            })
-                break;
-
-            case prefix+"help":;//activation of help command
+        switch(message.content.toLowerCase()){//detects more simple commandscase prefix+"help":;//activation of help command
                 if (message.channel.name !== "bot-commands"){
                     message.reply("use the bot commands channel!")
                     return
