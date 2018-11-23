@@ -75,7 +75,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         }
     }
     if (message.channel.name === "suggestions"){
-        if (message.content.toLowerCase.startsWith("I suggest")){
+        if (message.content.toLowerCase().startsWith("I suggest")){
             var suggestion = message.content.split("I suggest ").splice(1)
             message.react("👍")
             message.react("👎")
