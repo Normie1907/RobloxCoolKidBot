@@ -215,6 +215,26 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         }
     }
         switch(message.content.toLowerCase()){//detects more simple commandscase prefix+"help":;//activation of help command
+            case prefix+"8ball":
+                var number = Math.floor(Math.random()*4)
+                switch (number){
+                    case 4:
+                    message.channel.send("Yes")
+                    break
+                    case 3:
+                    message.channel.send("Probably")      
+                    break
+                    case 2:
+                    message.channel.send("Maybe")
+                    break
+                    case 1:
+                    message.channel.send("Probably not")
+                    break
+                    case 0:
+                    message.channel.send("No")
+                    break   
+                }
+            break
             case prefix+"help":
                 if (message.channel.name !== "bot-commands"){
                     message.reply("use the bot commands channel!")
