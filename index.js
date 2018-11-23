@@ -21,6 +21,10 @@ var eightBallCommand = {
     trigger:prefix+"8ball",
     description:"Do "+prefix+"8ball (question) to get an answer from the man himself"
 }
+var serverInfoCommand = {
+    trigger:prefix+"serverinfo",
+    description:"Tells you information about the server"
+}
 var pruneCommand = {
     trigger:prefix+"prune",
     description:"Do "+prefix+"prune (number 1-100)"
@@ -33,7 +37,7 @@ var banCommand = {
     trigger:prefix+"ban",
     description:"Do "+prefix+"ban @user | reason"
 }
-var commands = [helpCommand,shipCommand,autismCommand]//list of commands
+var commands = [helpCommand,shipCommand,autismCommand,eightBallCommand,serverInfoCommand]//list of commands
 var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only commands
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
@@ -284,6 +288,14 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     },{
                         name:commands[2].trigger,
                         value:commands[2].description,
+                        inline:false
+                    },{
+                        name:commands[3].trigger,
+                        value:commands[3].description,
+                        inline:false
+                    },{
+                        name:commands[4].trigger,
+                        value:commands[4].description,
                         inline:false
                     }
                 ]}
