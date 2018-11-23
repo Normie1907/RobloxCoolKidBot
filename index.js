@@ -17,6 +17,10 @@ var autismCommand = {
     trigger:prefix+"autism",
     description:"Do "+prefix+"autism (anything) to see how autistic it is"
 }
+var eightBallCommand = {
+    trigger:prefix+"8ball",
+    description:"Do "+prefix+"8ball (question) to get an answer from the man himself"
+}
 var pruneCommand = {
     trigger:prefix+"prune",
     description:"Do "+prefix+"prune (number 1-100)"
@@ -236,6 +240,9 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         }
     }
         switch(message.content.toLowerCase()){//detects more simple commandscase prefix+"help":;//activation of help command
+            case prefix+"serverinfo":
+                message.channel.send(message.guild.memberCount+"     "+message.guild.owner+"     "+message.guild.createdAt)
+            break
             case prefix+"help":
                 if (message.channel.name !== "bot-commands"){
                     message.reply("use the bot commands channel!")
