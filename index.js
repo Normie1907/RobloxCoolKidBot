@@ -254,7 +254,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     color: 0x09788d,
                     fields:[{
                         name:"Members",
-                        value:"0",             
+                        value:message.guild.memberCount,             
                         inline:false
                     },{
                         name:"Owner",
