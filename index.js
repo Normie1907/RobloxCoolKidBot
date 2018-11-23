@@ -47,6 +47,9 @@ client.on('ready', () => {//activates when "node ." is typed into command prompt
 client.on("guildMemberAdd",(man)=>{
     man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
 })
+client.on("guildMemberRemove",(woman)=>{
+    woman.guild.channels.find("name","server-logs").send(woman+" left the server or was kicked/banned")
+})
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
     if (!message.guild)return
     if (message.author.bot) return
