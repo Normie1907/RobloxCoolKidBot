@@ -189,6 +189,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     message.delete;//deletes the message calling the command, to accurately prune
                     message.channel.bulkDelete(args[0]);//deletes how many messages the person said to
                     message.reply("you pruned "+args[0]+" messages");//says which user pruned
+                    message.guild.channels.find("name","server-logs").send(message.author+" pruned "+args[0]+" messages in "+message.channel)
                 }
             }else{
                 message.reply("only staff can use this command");//tells a non-staff member that they need to be staff in order to prune
