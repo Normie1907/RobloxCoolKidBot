@@ -45,7 +45,7 @@ client.on('ready', () => {//activates when "node ." is typed into command prompt
     client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
 });
 client.on("guildMemberAdd",(man)=>{
-    man.guild.channels.find("server-logs","name").send(man+" joined the server, yayy!")
+    man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
 })
 client.on("message",(message)=>{//activates when a message is sent via dms or in a shared server [Commands one]
     if (!message.guild)return
