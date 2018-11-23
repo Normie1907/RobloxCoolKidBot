@@ -29,7 +29,7 @@ var banCommand = {
     trigger:prefix+"ban",
     description:"Do "+prefix+"ban @user | reason"
 }
-var commands = [helpCommand,levelCommand,moneyCommand,workCommand]//list of commands
+var commands = [helpCommand,shipCommand,autismCommand]//list of commands
 var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only commands
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
