@@ -258,11 +258,11 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                         inline:false
                     },{
                         name:"Owner",
-                        value:"1",
+                        value:message.guild.owner,
                         inline:false
                     },{
                         name:"Created at",
-                        value:message.guild.createdTimestamp,
+                        value:message.guild.createdAt,
                         inline:false
                     }
                 ]}
