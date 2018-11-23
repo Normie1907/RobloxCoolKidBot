@@ -9,17 +9,13 @@ var helpCommand = {
     trigger:prefix+"help",
     description:"Activates the help command"
 }
-var levelCommand = {
-    trigger:prefix+"level",
-    description:"Tells you your level and how much xp you have left until the next level"
+var shipCommand = {
+    trigger:prefix+"ship",
+    description:"Do "+prefix+"ship -(name1)- ~(name2)~"
 }
-var moneyCommand = {
-    trigger:prefix+"money",
-    description:"Tells you how much money you have"
-}
-var workCommand = {
-    trigger:prefix+"work",
-    description:"Gives you a random ammount of money"
+var autismCommand = {
+    trigger:prefix+"autism",
+    description:"Do "+prefix+"autism (anything) to see how autistic it is"
 }
 var pruneCommand = {
     trigger:prefix+"prune",
@@ -67,7 +63,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         message.react("🇫");//adds the regional indicator f emoji to the message
     }
     if (message.content.toLowerCase().includes("owo")||message.content.toLowerCase().includes("uwu")||message.content.toLowerCase().includes("rawr")){//if the message contains furry shit
-        message.channel.send("furfag lol");//says ur a furry
+        message.channel.send("furry lol");//says ur a furry
     }
     if (message.content.toLowerCase().includes("foreskin")){//if niggas be talkin bout foreskin
         message.channel.send("I heard foreskin :yum:");//tells people he heard foreskin
@@ -80,9 +76,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
     }
     if (message.content.toLowerCase().includes("no u")||message.content.toLowerCase().includes("ur mum gay")||message.content.toLowerCase().includes("your mom gay")){//detects dead memes
         message.channel.send("Bring dead memes elsewhere");//tells dead memers to heck off
-    }
-    if (message.content.toLowerCase().includes("alexa play despacito")||message.content.toLowerCase().includes("alexa, play despacito")||message.content.toLowerCase().includes("play despacito")){//if they say to play despacito
-        message.channel.send("ɴᴏᴡ ᴘʟᴀʏɪɴɢ: Despacito ───────────────:white_circle:───────────────────▐▐");//despacito is now playing copypasta
     }
     if (message.content.toLowerCase().includes("this is so sad")){//if they say this is so sad
         var numbah = Math.floor(Math.random()*3)//chooses a random number 1-3
@@ -99,6 +92,52 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         break;
         }
     }
+        if (message.content.startsWith(prefix+"autism")){//if it's the autism command
+            if (message.channel.name === "bot-commands"){//if it's in the bot commands channel
+                var autisticThang = message.content.split(prefix+"autism ").splice(1);//anything after "?autism " will be rated
+                var percent = Math.floor(Math.random()*100);//chooses a random percent 0-100
+                var trueAutist = "";//a blank string for later
+                for (var i = 0; i < autisticThang.length; i++){//for every letter in the array to be rated
+                    trueAutist = trueAutist+autisticThang[i]+" ";//adds the letters, forming a string
+                }
+                if (!autisticThang){//if there is nothing to be rated
+                    message.reply("proper use: ?autism (thing to be rated)");//warns the user that they need to specify somehting to rate
+                    return;
+                }
+                if (trueAutist.toLowerCase() === "damon "){//if the thing being rated is me
+                    percent = 99//makes the percent 99
+                } else if (trueAutist.toLowerCase() === "tim "){//if the thing to be rated is tim
+                    percent = 69//makes the percent 69
+                }
+                message.channel.send(trueAutist+"is "+percent+"% autistic!");//says the autistic thing is however much autistic
+            }else{
+                message.reply("use the bot commands channel!")//warns the user to use the bot commands channel
+                return
+            }
+        }
+        if (message.content.startsWith(prefix+"ship")){//if they're trying to use the ship command
+            if (message.channel.name === "bot-commands"){//if the channel is bot commands
+                var ship1 = message.content.split("-").splice(1);//first person had to be enclosed in dashes
+                var ship2 = message.content.split("~").splice(1);//second person has to be enclosed in squiggly lines
+                if (!ship1[0]||!ship2[0]){//if one person is missing
+                    message.reply("proper use: ?ship -(name1)- ~(name2)~");//tellls the person what the proper use of the command is
+                    return;
+                }
+                var shipPercent = Math.floor(Math.random()*100);//makes a random number 0-100
+                switch (ship1[0].toLowerCase()){//detects who the first person is in lower case
+                    case "damon":;//if it's me
+                    shipPercent = 0;//don't ship niggas with me
+                    break;
+                }
+                if (ship2[0].toLowerCase()==="damon"){//if the second person is me
+                    shipPercent = 0;//don't ship niggas with me
+                }
+                message.channel.send("**"+ship1[0]+"**"+" x "+"**"+ship2[0]+"**"+" - it's a "+"``"+shipPercent+"%"+"``"+" match");//tells the person the decision in the shipping
+            }else{
+                message.reply("use the bot commands channel!")//warns the user to use the bot commands channel
+                return
+            }
+        }
         if (message.content.startsWith(prefix+"prune")){//activation of prune command
             if (basicStaff||moderator||administrator||superAdmin||RCK){//makes sure the person pruning is staff
                 var args = message.content.split(" ").splice(1);//splits the command and the arguments
@@ -195,10 +234,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     },{
                         name:commands[2].trigger,
                         value:commands[2].description,
-                        inline:false
-                    },{
-                        name:commands[3].trigger,
-                        value:commands[3].description,
                         inline:false
                     }
                 ]}
