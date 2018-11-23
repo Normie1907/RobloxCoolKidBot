@@ -81,7 +81,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.react("👎")
             return
         }else{
-            message.delete
+            message.delete()
             return
         }
     }
@@ -197,7 +197,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 }else if(args[0]>100){//limits pruned messages to 100
                     message.reply("you can't prune more than 100 messgaes at once");//informs users that only 100 messages can be pruned
                 }else{//activates if messages can be pruned
-                    message.delete;//deletes the message calling the command, to accurately prune
+                    message.delete();//deletes the message calling the command, to accurately prune
                     message.channel.bulkDelete(args[0]);//deletes how many messages the person said to
                     message.reply("you pruned "+args[0]+" messages");//says which user pruned
                     message.guild.channels.find("name","server-logs").send(message.author+" pruned "+args[0]+" messages in "+message.channel)
