@@ -92,7 +92,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         break;
         }
     }
-        if (message.content.toLowercase().startsWith(prefix+"8ball")){
+        if (message.content.toLowerCase().startsWith(prefix+"8ball")){
             var number = Math.floor(Math.random()*4)
                 switch (number){
                     case 4:
@@ -112,7 +112,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                     break   
                 }
         }
-        if (message.content.toLowercase().startsWith(prefix+"autism")){//if it's the autism command
+        if (message.content.toLowerCase().startsWith(prefix+"autism")){//if it's the autism command
             if (message.channel.name === "bot-commands"){//if it's in the bot commands channel
                 var autisticThang = message.content.split(prefix+"autism ").splice(1);//anything after "?autism " will be rated
                 var percent = Math.floor(Math.random()*100);//chooses a random percent 0-100
@@ -135,7 +135,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 return
             }
         }
-        if (message.content.toLowercase().startsWith(prefix+"ship")){//if they're trying to use the ship command
+        if (message.content.toLowerCase().startsWith(prefix+"ship")){//if they're trying to use the ship command
             if (message.channel.name === "bot-commands"){//if the channel is bot commands
                 var ship1 = message.content.split("-").splice(1);//first person had to be enclosed in dashes
                 var ship2 = message.content.split("~").splice(1);//second person has to be enclosed in squiggly lines
@@ -158,7 +158,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 return
             }
         }
-        if (message.content.toLowercase().startsWith(prefix+"prune")){//activation of prune command
+        if (message.content.toLowerCase().startsWith(prefix+"prune")){//activation of prune command
             if (basicStaff||moderator||administrator||superAdmin||RCK){//makes sure the person pruning is staff
                 var args = message.content.split(" ").splice(1);//splits the command and the arguments
                 if (!args[0]){//activates if no arguments are given
@@ -175,7 +175,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 message.reply("only staff can use this command");//tells a non-staff member that they need to be staff in order to prune
             }
         }
-        if (message.content.toLowercase().startsWith(prefix+"ban")){//if it's the ban command
+        if (message.content.toLowerCase().startsWith(prefix+"ban")){//if it's the ban command
             if (administrator||superAdmin||RCK){//if the person has a proper role
                 var memberToBan = message.mentions.members.first();//sets the person to ban as the first mention
                 var banReason = message.content.split(" | ").slice(1);//puts the ban reason as anything after a "|"
@@ -203,7 +203,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to ban members");//tells a non-admin they can't ban people
         }
     }
-    if (message.content.toLowercase().startsWith(prefix+"kick")){//if it's the kick command
+    if (message.content.toLowerCase().startsWith(prefix+"kick")){//if it's the kick command
             if (administrator||superAdmin||RCK||moderator){//if the person has a proper role
                 var memberToKick = message.mentions.members.first();//sets the person to kick as the first mention
                 var kickReason = message.content.split(" | ").slice(1);//puts the kick reason as anything after a "|"
