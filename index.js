@@ -258,7 +258,7 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                         inline:false
                     },{
                         name:"Owner",
-                        value:message.guild.owner,
+                        value:message.guild.ownerID,
                         inline:false
                     },{
                         name:"Created at",
