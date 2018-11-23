@@ -77,15 +77,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
         userData[message.author.id + message.guild.id].xp = userData[message.author.id + message.guild.id].xp - userData[message.author.id + message.guild.id].level*100
         message.reply("you reached level "+userData[message.author.id + message.guild.id].level)
     }
-        if (message.content.startsWith(prefix+"SetCommandChannel ")){
-            var commandChannel = message.content.split(prefix+"SetCommandChannel ").splice(1)
-            serverData[message.guild.id].commandChannel = commandChannel 
-            fs.writeFile("serverData.json", JSON.stringify(serverData), (err) => {
-                if (err) console.error(err)
-            })
-            message.channel.send("Set bot commands channel to "+serverData[message.guild.id].commandChannel)
-            return
-        }
         if (message.content.startsWith(prefix+"prune")){//activation of prune command
             if (basicStaff||moderator||administrator||superAdmin||RCK){//makes sure the person pruning is staff
                 var args = message.content.split(" ").splice(1);//splits the command and the arguments
@@ -162,8 +153,13 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             message.reply("you do not have permission to kick members");//tells a non-admin they can't kick people
         }
     }
+    if (message.channel.name !== "bot-commands")return
         switch(message.content.toLowerCase()){//detects more simple commands
             case prefix+"level":
+                if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
                 message.channel.send({embed:{
                     title:message.author.username+"'s Level",
                     color: 0x22ccb7,
@@ -181,6 +177,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 })
                 break;
             case prefix+"work":
+                if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
                 var moneyRandom = Math.floor(Math.random()*100)
                 userData[message.author.id + message.guild.id].money += moneyRandom
                 message.channel.send({embed:{
@@ -199,6 +199,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 })
                 break;
             case prefix+"money":
+                if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
                     message.channel.send({embed:{
                 title:"Bank",
                 color: 0x2a4722,
@@ -216,7 +220,10 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
                 break;
 
             case prefix+"help":;//activation of help command
-                if (message.channel.name === serverData[message.guild.id].commandChannel[0]||!serverData[message.guild.id].commandChannel[0]){
+                if (message.channel.name !== "bot-commands"){
+                    message.reply("use the bot commands channel!")
+                    return
+                }
                 message.channel.send({embed:{
                     title:"Commands",
                     color: 0xFFFFFF,
@@ -259,7 +266,6 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             ]}
 
         })
-                }else{message.reply("use the bot commands channel!")}
             break;
         
         }
