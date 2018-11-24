@@ -44,6 +44,7 @@ var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
     client.user.setActivity("over my server! | prefix: "+prefix, {type:"WATCHING"})
+    client.user.setStatus("invisible")
 });
 client.on("guildMemberAdd",(man)=>{
     man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
