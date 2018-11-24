@@ -86,6 +86,11 @@ client.on("message",(message)=>{//activates when a message is sent via dms or in
             return
         }
     }
+    if (message.content.toLowerCase().includes("roblox is gay")){
+        message.reply("take that back before you regret it")
+        message.react("👎")
+        message.react("😡")
+    }
     if (message.content.toLowerCase().includes("rip")||message.content.toLowerCase().includes("f to pay respects")){//if the message says rip or f to pay respects
         message.react("🇫");//adds the regional indicator f emoji to the message
     }
