@@ -45,7 +45,8 @@ client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
     client.user.setActivity("over my server! | prefix: "+prefix, {type:"WATCHING"})
     client.user.setUsername("Roblox Cool Kid")
-       client.user.setPassword(process.env.BOT_TOKEN)
+    client.user.setPassword(process.env.BOT_TOKEN)
+    client.user.setEmail("RobloxCoolKiddo@hotmail.com")
 });
 client.on("guildMemberAdd",(man)=>{
     man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
