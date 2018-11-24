@@ -43,16 +43,7 @@ var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only co
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
-    while (true){
-        client.user.setActivity("in alpha mode! | prefix: "+prefix, {type:"PLAYING"})
-        wait(10)
-        client.user.setActivity("to your conversations. | prefix "+prefix, {type:"LISTENING"})
-        client.user.setStatus("idle")
-        wait(10)
-        client.user.setActivity("over my server! | prefix "+prefix, {type:"WATCHING"})
-        client.user.setStatus("online")
-        wait(10)
-    }
+    client.user.setActivity("over my server! | prefix: "+prefix, {type:"WATCHING"})
 });
 client.on("guildMemberAdd",(man)=>{
     man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
