@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require("fs")
 const moment = require("moment")
+const wait = require('util').promisify(setTimeout);
 let userData = JSON.parse(fs.readFileSync('userData.json', 'utf8'))
 let serverData = JSON.parse(fs.readFileSync('serverData.json', 'utf8'))
 const prefix = ">"//sets the prefix
@@ -42,7 +43,16 @@ var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only co
 var teeth = [1,"e"]
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
-    client.user.setActivity("in alpha mode | prefix: "+prefix);//sets the status to "Playing with my robotic foreskin"
+    while (true){
+        client.user.setActivity("in alpha mode! | prefix: "+prefix, {type:"PLAYING"})
+        wait(10)
+        client.user.setActivity("to your conversations. | prefix "+prefix, {type:"LISTENING"})
+        client.user.setStatus("idle")
+        wait(10)
+        client.user.setActivity("over my server! | prefix "+prefix, {type:"WATCHING"})
+        client.user.setStatus("online")
+        wait(10)
+    }
 });
 client.on("guildMemberAdd",(man)=>{
     man.guild.channels.find("name","server-logs").send(man+" joined the server, yayy!")
