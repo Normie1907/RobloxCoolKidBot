@@ -47,13 +47,13 @@ client.on('typingStart', () =>{
         randomNumber = Math.floor(Math.random()*2)
         switch(randomNumber){
             case 0:
-                client.channels.random.send("Send feet pics pls")
+                client.guild.channels.random.send("Send feet pics pls")
             break
             case 1:
-                client.channels.random.send("Bro lemme hit ur juul just once")
+                client.guild.channels.random.send("Bro lemme hit ur juul just once")
             break
             case 2:
-                client.channels.random.send("Ya know what? Fuck you, man")
+                client.guild.channels.random.send("Ya know what? Fuck you, man")
             break
         }
     }
