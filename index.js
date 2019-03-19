@@ -41,6 +41,23 @@ var banCommand = {
 var commands = [helpCommand,shipCommand,autismCommand,eightBallCommand,serverInfoCommand]//list of commands
 var staffCommands = [pruneCommand,kickCommand,banCommand]//list of staff only commands
 var teeth = [1,"e"]
+client.on('typingStart', () =>{
+    while (true) {
+        wait(10)
+        randomNumber = Math.floor(Math.random()*2)
+        switch(randomNumber){
+            case 0:
+                client.channels.random.send("Send feet pics pls")
+            break
+            case 1:
+                client.channels.random.send("Bro lemme hit ur juul just once")
+            break
+            case 2:
+                client.channels.random.send("Ya know what? Fuck you, man")
+            break
+        }
+    }
+})
 client.on('ready', () => {//activates when "node ." is typed into command prompt
     console.log('Bot ready!');//tells the command prompt that the bot is ready
     client.user.setActivity("over my server! | prefix: "+prefix, {type:"WATCHING"})
